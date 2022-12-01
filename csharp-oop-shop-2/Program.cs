@@ -5,3 +5,4 @@
  *  Elettrodomestico
  *  Cibo in Scatola (al massimo può contenere 300g di peso su una scatola)
 */
+
