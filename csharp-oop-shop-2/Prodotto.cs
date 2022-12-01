@@ -1,5 +1,7 @@
 ﻿namespace CSharpShop {
     public class Prodotto {
+
+        // PROPRIETA / ATTRIBUTI
         public string Codice { get; init; }
         public string Nome { get; set; }
         public string NomeEsteto => Codice + Nome;
@@ -26,6 +28,16 @@
         }
         public double PrezzoConIva => PrezzoBase + (PrezzoBase * Iva);
 
+        // COSTRUTTORI
+        public Prodotto(string nome, string descrizione, double prezzoBase, double iva) {
+            Codice = new Random().Next(1, 100_000_000).ToString(); // Valori casuali da 1 a 99,999,999
+            Nome = NullCheck(nome);
+            Descrizione = NullCheck(descrizione);
+            PrezzoBase = prezzoBase;
+            Iva = iva;
+        }
+
+        // METODI PUBBLICI
         public string FormattaProdotto() {
             return $@"{Nome} [{NomeEsteto}]:
 Desc - {Descrizione}
@@ -33,12 +45,9 @@ EUR {PrezzoConIva}
 IVA {Iva}";
         }
 
-        public Prodotto(string nome, string descrizione, double prezzoBase, double iva) {
-            Codice = new Random().Next(1, 100_000_000).ToString(); // Valori casuali da 1 a 99,999,999
-            Nome = nome ?? throw new ArgumentNullException(nameof(nome), $"{nameof(nome)} non può essere nullo");
-            Descrizione = descrizione ?? throw new ArgumentNullException(nameof(descrizione), $"{nameof(descrizione)} non può essere nullo");
-            PrezzoBase = prezzoBase;
-            Iva = iva;
+        // METODI PRIVATI
+        private static string NullCheck(string nome) {
+            return nome ?? throw new ArgumentNullException(nameof(nome), $"{nameof(nome)} non può essere nullo");
         }
     }
 }
